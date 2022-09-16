@@ -1058,6 +1058,11 @@ MonoBehaviour:
   loadingSlider: {fileID: 728692374}
   loadingText: {fileID: 1564835046}
   playButton: {fileID: 1447508433}
+  nextScene:
+    m_AssetGUID: 9fc0d4010bbf28b4594072e72b8655ab
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
 --- !u!4 &1843637199
 Transform:
   m_ObjectHideFlags: 0

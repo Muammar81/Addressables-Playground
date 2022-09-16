@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
@@ -26,7 +23,7 @@ public class Bar : MonoBehaviour
     public async Task Fill(int delay)
     {
         Reset();
-        
+
         while (bar.fillAmount < 1)
         {
             bar.fillAmount += Time.deltaTime;
