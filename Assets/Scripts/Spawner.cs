@@ -19,6 +19,15 @@ public class Spawner : MonoBehaviour
     private void OnEnable() => startButton.onClick.AddListener(DownloadAllCubes);
     private void OnDisable() => startButton.onClick.RemoveListener(DownloadAllCubes);
 
+    private void Update()
+    {
+        if (_opHandles.Count == 0) return;
+        foreach (var op in _opHandles)
+        {
+            if (op.Value.Status == AsyncOperationStatus.Succeeded) continue;
+            print($"{op.Key}: {op.Value.PercentComplete}");
+        }
+    }
 
 
     public void DownloadAllCubes()
@@ -26,25 +35,23 @@ public class Spawner : MonoBehaviour
         foreach (var cube in cubePrefabs)
         {
             _opHandles.Add(cube, Addressables.DownloadDependenciesAsync(cube));
-            _opHandles[cube].Completed += LoadCube ; 
+            _opHandles[cube].Completed += Downloaded ; 
         }
     }
 
-    private void LoadCube(AsyncOperationHandle handle)
+    private void Downloaded(AsyncOperationHandle handle)
     {
         var pos = spawnPoints[spawnCount].position;
         var rot = spawnPoints[spawnCount].rotation;
-        Addressables.InstantiateAsync(handle,pos,rot);
+        var obj = Addressables.InstantiateAsync(handle,pos,rot);
+        obj.Completed += Instantiated;
         spawnCount++;
     }
 
-    private void Update()
+    private void Instantiated(AsyncOperationHandle<GameObject> obj)
     {
-        if (_opHandles.Count == 0) return;
-        foreach (var op in _opHandles)
-        {
-            if(op.Value.Status == AsyncOperationStatus.Succeeded) continue;
-            print($"{op.Key}: {op.Value.PercentComplete}");
-        }
+        print(obj.DebugName +" is instantiated");
     }
+
+
 }
