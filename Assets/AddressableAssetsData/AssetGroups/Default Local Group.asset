@@ -17,16 +17,12 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: f54fa9446f7cd2b44bacf601a236de76
   m_SerializeEntries:
-  - m_GUID: 3ab46d017f625964b9e78b1dda6007d1
-    m_Address: Assets/Yellow.prefab
+  - m_GUID: 575aecc6365e18c4799f4a01a83134a5
+    m_Address: Assets/Prefabs/Red.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 5b9af4cad5aaf9f40b4961cfd776c77b
-    m_Address: Assets/Blue.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 4c27e91a2f09fca44bc32e02171b9b2c
-    m_Address: Assets/Red.prefab
+  - m_GUID: 5c19e74818dd5b84daed82a684cb2d11
+    m_Address: Assets/Prefabs/Yellow.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0
