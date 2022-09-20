@@ -15,7 +15,8 @@ public class LoadRemoteScene : MonoBehaviour
     [SerializeField] private TMP_Text loadingText;
     [SerializeField] private Button playButton;
     [SerializeField] private AssetReference nextScene;
-    private AssetReference mainMenuScene;
+    
+    private AssetReference _mainMenuScene;
 
     private AsyncOperationHandle _downloadHandle;
     private int _nextSceneIndex;

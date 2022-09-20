@@ -616,8 +616,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56fd5c69241d7b645885520869fcba80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cubePrefabs:
-  - m_AssetGUID: 5b9af4cad5aaf9f40b4961cfd776c77b
+  cubeReferences:
+  - m_AssetGUID: 3ab46d017f625964b9e78b1dda6007d1
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
@@ -625,7 +625,7 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  - m_AssetGUID: 3ab46d017f625964b9e78b1dda6007d1
+  - m_AssetGUID: 5b9af4cad5aaf9f40b4961cfd776c77b
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0

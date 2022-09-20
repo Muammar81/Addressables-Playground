@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] private List<AssetReference> cubePrefabs;
+    [SerializeField] private List<AssetReference> cubeReferences;
     [SerializeField] private Transform[] spawnPoints;
     [SerializeField] private Button startButton;
 
@@ -25,26 +25,44 @@ public class Spawner : MonoBehaviour
         foreach (var op in _opHandles)
         {
             if (op.Value.Status == AsyncOperationStatus.Succeeded) continue;
-            print($"{op.Key}: {op.Value.PercentComplete}");
+            print($"{op.Key}: {op.Value.GetDownloadStatus().Percent}");
         }
     }
 
 
     public void DownloadAllCubes()
     {
-        foreach (var cube in cubePrefabs)
+        foreach (var cube in cubeReferences)
         {
-            _opHandles.Add(cube, Addressables.DownloadDependenciesAsync(cube));
-            _opHandles[cube].Completed += Downloaded ; 
+            //var handle = Addressables.DownloadDependenciesAsync(cube);
+            //_opHandles.Add(cube, handle);
+            var handle = Addressables.LoadAssetAsync<GameObject>(cube);
+            handle.Completed += (op) =>
+            {
+                print($"Loaded: {handle.DebugName}");
+                var pos = spawnPoints[spawnCount].position;
+                var rot = spawnPoints[spawnCount].rotation;
+                
+                var h = cube.InstantiateAsync(pos,rot, transform);
+                spawnCount++;
+                
+                h.Completed += Instantiated;
+            };
         }
+    }
+
+    private void Downloaded(AsyncOperationHandle<GameObject> op)
+    {
+        //Addressables.InstantiateAsync(obj ,pos,rot);
     }
 
     private void Downloaded(AsyncOperationHandle handle)
     {
+        print($"Downloaded: {handle.DebugName}");
         var pos = spawnPoints[spawnCount].position;
         var rot = spawnPoints[spawnCount].rotation;
-        var obj = Addressables.InstantiateAsync(handle,pos,rot);
-        obj.Completed += Instantiated;
+        //var obj = Addressables.InstantiateAsync(handle,pos,rot);
+        //obj.Completed += Instantiated;
         spawnCount++;
     }
 
