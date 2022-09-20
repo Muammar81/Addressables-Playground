@@ -1,17 +1,25 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.UI;
 
 public class Spawner : MonoBehaviour
 {
     [SerializeField] private List<AssetReference> cubePrefabs;
     [SerializeField] private Transform[] spawnPoints;
+    [SerializeField] private Button startButton;
 
-    private Dictionary<AssetReference, AsyncOperationHandle> _opHandles;
+    private Dictionary<AssetReference, AsyncOperationHandle> _opHandles = new ();
     private int spawnCount;
+
+    private void OnEnable() => startButton.onClick.AddListener(DownloadAllCubes);
+    private void OnDisable() => startButton.onClick.RemoveListener(DownloadAllCubes);
+
+
 
     public void DownloadAllCubes()
     {
@@ -32,6 +40,7 @@ public class Spawner : MonoBehaviour
 
     private void Update()
     {
+        if (_opHandles.Count == 0) return;
         foreach (var op in _opHandles)
         {
             if(op.Value.Status == AsyncOperationStatus.Succeeded) continue;

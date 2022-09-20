@@ -633,6 +633,7 @@ MonoBehaviour:
   - {fileID: 592292789}
   - {fileID: 1700649426}
   - {fileID: 1559091725}
+  startButton: {fileID: 7367750286099819990}
 --- !u!4 &749022140
 Transform:
   m_ObjectHideFlags: 0
