@@ -23,7 +23,9 @@ public class Spawner : MonoBehaviour
             //if (op.Value.Status == AsyncOperationStatus.Succeeded) continue;
             var p = op.Value.GetDownloadStatus().Percent;
             if (p == 0 || p >= 1) return;
+            #if UNITY_EDITOR
             print($"{op.Key.editorAsset.name}: {p.ToString("P0")}");
+            #endif
         }
     }
 
@@ -36,7 +38,9 @@ public class Spawner : MonoBehaviour
             var handle = Addressables.DownloadDependenciesAsync(cube);
             handle.Completed += (op) =>
             {
+                #if UNITY_EDITOR
                 print($"Loaded: {cube.editorAsset.name}");
+                #endif
                 var pos = spawnPoints[spawnCount].position;
                 var rot = spawnPoints[spawnCount].rotation;
                 
